@@ -73,7 +73,7 @@ class _MyWidgetState extends State<Homepage> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        // padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
             Container(
@@ -87,7 +87,7 @@ class _MyWidgetState extends State<Homepage> {
                   for (int i = 0; i < 10; i++)
                     const Padding(
                       padding:
-                          EdgeInsets.all(8.0), // Add some space between items
+                          EdgeInsets.all(8.0),
                       child: CircleAvatar(
                         radius: 30,
                         backgroundColor: Colors.blue,
@@ -191,9 +191,7 @@ class _MyWidgetState extends State<Homepage> {
                 dotWidth: 15,
               ),
             ),
-            const SizedBox(
-              height: 8,
-            ),
+           
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -289,9 +287,9 @@ class _MyWidgetState extends State<Homepage> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 12,
-            ),
+            // const SizedBox(
+            //   height: 12,
+            // ),
             Stack(
               // clipBehavior: Clip.antiAlias,
               children: [
@@ -374,9 +372,7 @@ class _MyWidgetState extends State<Homepage> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 28,
-            ),
+         
             BottomAppBar(
                 color: Colors.transparent,
                 elevation: 0,
