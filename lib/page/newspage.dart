@@ -10,7 +10,6 @@ void main() {
   runApp(const Newspage());
 }
 
-
 class Newspage extends StatefulWidget {
   const Newspage({super.key});
 
@@ -28,20 +27,23 @@ class _MyWidgetState extends State<Newspage> {
     });
   }
 
+  late int page = 1;
+
   Widget iconro() {
     return Row(
       children: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.download, size: 24, color: Colors.white),
+          icon: const Icon(Icons.download, size: 20, color: Colors.white),
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(CupertinoIcons.heart_fill, size: 24, color: Colors.white),
+          icon: const Icon(CupertinoIcons.heart_fill,
+              size: 20, color: Colors.white),
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.share, size: 24, color: Colors.white),
+          icon: const Icon(Icons.share, size: 20, color: Colors.white),
         ),
       ],
     );
@@ -83,7 +85,7 @@ class _MyWidgetState extends State<Newspage> {
       ),
       backgroundColor: const Color.fromARGB(255, 35, 23, 80),
       body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: _apiService.fetchData(),
+        future: _apiService.fetchData(page),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: Splash());
@@ -92,11 +94,47 @@ class _MyWidgetState extends State<Newspage> {
           } else {
             List<Map<String, dynamic>> data = snapshot.data!;
             return ListView.builder(
-              itemCount: data.length,
+              itemCount: data.length + 1, // Add 1 for the additional ListTile
               itemBuilder: (context, index) {
+                if (index == data.length) {
+                  // This is the additional ListTile with the IconButton
+                  return ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: page>1,
+                        child: IconButton(
+                            onPressed: () {
+                              if (page >= 2) {
+                                setState(() {
+                                  page--;
+                                }
+                                );
+                                
+                              }else{
+                                
+                              }
+                            },
+                            icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            if (page >= 1) {
+                              setState(() {
+                                page++;
+                              });
+                            }
+                          },
+                          icon: Icon(Icons.arrow_forward_ios,color: Colors.white)),
+                    ],
+                  ));
+                }
+
                 String imageUrl = data[index]['thumb'];
                 String title = data[index]['title'];
                 String key = data[index]['key'];
+
                 return ListTile(
                   title: Column(
                     children: [
@@ -111,22 +149,27 @@ class _MyWidgetState extends State<Newspage> {
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(20.0),
-                          child: Image.network(imageUrl,
-                              width: 360, height: 200, fit: BoxFit.fill),
+                          child: Image.network(
+                            imageUrl,
+                            width: 360,
+                            height: 200,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                            width: 180,
+                            width: 176,
                             child: Text(
-                              textAlign: TextAlign.start,
                               title,
+                              textAlign: TextAlign.start,
                               style: GoogleFonts.montserrat(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 14,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                           iconro(),
@@ -140,6 +183,17 @@ class _MyWidgetState extends State<Newspage> {
           }
         },
       ),
+
+      // floatingActionButton:FloatingActionButton(onPressed: (){
+
+      //   if (page > 0) {
+      //     setState(() {
+      //       page ++;
+      //     });
+
+      // };
+      // }
+      // ) ,
     );
   }
 }
