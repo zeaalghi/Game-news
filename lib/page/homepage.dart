@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:news/page/search.dart';
 import 'newspage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:news/service/auth.dart';
+import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
+import 'package:news/model/e_sport.dart';
 
 void main() {
   runApp(const Homepage());
@@ -18,19 +21,16 @@ class Homepage extends StatefulWidget {
 
 class _MyWidgetState extends State<Homepage> {
   final _controller = PageController();
-  int _selectedButtonIndex = 0;
   int _selectedButtonIndexb = 0;
 
   void _onButtonPressed(int index) {
     setState(() {
-      _selectedButtonIndex = index;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _selectedButtonIndex = 0;
     _selectedButtonIndexb = 0;
   }
 
@@ -192,186 +192,206 @@ class _MyWidgetState extends State<Homepage> {
               ),
             ),
            
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _onButtonPressed(0);
-                  },
-                  child: Column(
-                    children: [
-                      Text(
-                        'News',
-                        style: GoogleFonts.montserrat(
-                          color: _selectedButtonIndex == 0
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.grey,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        width: 32,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: _selectedButtonIndex == 0
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _onButtonPressed(1);
-                  },
-                  child: Column(
-                    children: [
-                      Text(
-                        'Team Ranking',
-                        style: GoogleFonts.montserrat(
-                          color: _selectedButtonIndex == 1
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.grey,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        width: 32,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: _selectedButtonIndex == 1
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _onButtonPressed(2);
-                  },
-                  child: Column(
-                    children: [
-                      Text(
-                        'Watch',
-                        style: GoogleFonts.montserrat(
-                          color: _selectedButtonIndex == 2
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.grey,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Container(
-                        width: 32,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: _selectedButtonIndex == 2
-                              ? const Color.fromARGB(255, 35, 23, 80)
-                              : Colors.transparent,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+           Container(
+            height: 310,
+            width: 350,
+            // color: Colors.black,
+             child: ContainedTabBarView(tabs: 
+             [
+              Text('E-Sport',style: GoogleFonts.montserrat(fontSize:14 ,fontWeight: FontWeight.w700 ),),
+              Text('PC Games',style: GoogleFonts.montserrat(fontSize:14,fontWeight: FontWeight.w700 ),),
+              Text('Console Games',style: GoogleFonts.montserrat(fontSize:14 ,fontWeight: FontWeight.w700),),
+             ], views:
+             [
+              // Container(color: Colors.amber,),
+              Esport(cat: "e-sport"),
+              Esport(cat: "pc"),
+              Esport(cat: "console-game"),
+             
+              
+             ]
+              ),
+           ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     GestureDetector(
+            //       onTap: () {
+            //         _onButtonPressed(0);
+            //       },
+            //       child: Column(
+            //         children: [
+            //           Text(
+            //             'News',
+            //             style: GoogleFonts.montserrat(
+            //               color: _selectedButtonIndex == 0
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.grey,
+            //               fontSize: 18,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           const SizedBox(height: 8),
+            //           Container(
+            //             width: 32,
+            //             height: 4,
+            //             decoration: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(6),
+            //               color: _selectedButtonIndex == 0
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.transparent,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {
+            //         _onButtonPressed(1);
+            //       },
+            //       child: Column(
+            //         children: [
+            //           Text(
+            //             'Team Ranking',
+            //             style: GoogleFonts.montserrat(
+            //               color: _selectedButtonIndex == 1
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.grey,
+            //               fontSize: 18,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           const SizedBox(height: 8),
+            //           Container(
+            //             width: 32,
+            //             height: 4,
+            //             decoration: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(6),
+            //               color: _selectedButtonIndex == 1
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.transparent,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {
+            //         _onButtonPressed(2);
+            //       },
+            //       child: Column(
+            //         children: [
+            //           Text(
+            //             'Watch',
+            //             style: GoogleFonts.montserrat(
+            //               color: _selectedButtonIndex == 2
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.grey,
+            //               fontSize: 18,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           const SizedBox(height: 12),
+            //           Container(
+            //             width: 32,
+            //             height: 4,
+            //             decoration: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(6),
+            //               color: _selectedButtonIndex == 2
+            //                   ? const Color.fromARGB(255, 35, 23, 80)
+            //                   : Colors.transparent,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
             // const SizedBox(
             //   height: 12,
             // ),
-            Stack(
-              // clipBehavior: Clip.antiAlias,
-              children: [
-                Container(
-                  width: 330,
-                  height: 273,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(46)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(46),
-                    child: Image.asset(
-                      'images/roshan.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  top: 200,
-                  left: 0,
-                  right: 0,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 20,
-                        child: Container(
-                          width: 241,
-                          height: 54,
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(45),
-                            ),
-                            color: Color.fromARGB(255, 35, 23, 80),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Diretide Event',
-                              style: GoogleFonts.montserrat(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Stack(
-                        children: [
-                          Positioned(
-                            bottom: 0,
-                            top: null,
-                            left: 230,
-                            child: Container(
-                              width: 100,
-                              height: 62,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(0),
-                                  topLeft: Radius.circular(30),
-                                  bottomLeft: Radius.circular(0),
-                                  bottomRight: Radius.circular(40),
-                                ),
-                                color: Color.fromARGB(255, 64, 255, 175),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'NEWS',
-                                  style: GoogleFonts.montserrat(
-                                      color:
-                                          const Color.fromARGB(255, 35, 23, 80),
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            // Stack(
+            //   // clipBehavior: Clip.antiAlias,
+            //   children: [
+            //     Container(
+            //       width: 330,
+            //       height: 273,
+            //       decoration:
+            //           BoxDecoration(borderRadius: BorderRadius.circular(46)),
+            //       child: ClipRRect(
+            //         borderRadius: BorderRadius.circular(46),
+            //         child: Image.asset(
+            //           'images/roshan.png',
+            //           fit: BoxFit.cover,
+            //         ),
+            //       ),
+            //     ),
+            //     Positioned(
+            //       bottom: 0,
+            //       top: 200,
+            //       left: 0,
+            //       right: 0,
+            //       child: Stack(
+            //         children: [
+            //           Positioned(
+            //             top: 20,
+            //             child: Container(
+            //               width: 241,
+            //               height: 54,
+            //               decoration: const BoxDecoration(
+            //                 borderRadius: BorderRadius.only(
+            //                   bottomLeft: Radius.circular(45),
+            //                 ),
+            //                 color: Color.fromARGB(255, 35, 23, 80),
+            //               ),
+            //               child: Center(
+            //                 child: Text(
+            //                   'Diretide Event',
+            //                   style: GoogleFonts.montserrat(
+            //                       color: Colors.white,
+            //                       fontWeight: FontWeight.w600,
+            //                       fontSize: 12),
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //           Stack(
+            //             children: [
+            //               Positioned(
+            //                 bottom: 0,
+            //                 top: null,
+            //                 left: 230,
+            //                 child: Container(
+            //                   width: 100,
+            //                   height: 62,
+            //                   decoration: const BoxDecoration(
+            //                     borderRadius: BorderRadius.only(
+            //                       topRight: Radius.circular(0),
+            //                       topLeft: Radius.circular(30),
+            //                       bottomLeft: Radius.circular(0),
+            //                       bottomRight: Radius.circular(40),
+            //                     ),
+            //                     color: Color.fromARGB(255, 64, 255, 175),
+            //                   ),
+            //                   child: Center(
+            //                     child: Text(
+            //                       'NEWS',
+            //                       style: GoogleFonts.montserrat(
+            //                           color:
+            //                               const Color.fromARGB(255, 35, 23, 80),
+            //                           fontWeight: FontWeight.w700,
+            //                           fontSize: 12),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ],
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
          
             BottomAppBar(
                 color: Colors.transparent,
@@ -450,12 +470,24 @@ class _MyWidgetState extends State<Homepage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        _onButtonPressedb(2);
+                       Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchPage(),
+                          ),
+                        ).then((selectedIndex) {
+                          if (selectedIndex != null) {
+                            setState(() {
+                              _selectedButtonIndexb = selectedIndex;
+                            });
+                          }
+                        });
+
                       },
                       child: Column(
                         children: [
                           Text(
-                            'Watch',
+                            'Search',
                             style: GoogleFonts.montserrat(
                               color: _selectedButtonIndexb == 2
                                   ? const Color.fromARGB(255, 64, 255, 175)
